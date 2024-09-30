@@ -1,3 +1,41 @@
+/*
+_uid function generates a cryptographically secure unique identifier (UID) of a specified length.
+It uses the pgcrypto extension to ensure cryptographic randomness.
+
+Parameters:
+- len INTEGER: The desired length of the UID. Must be a positive integer.
+
+Returns:
+TEXT: A string of random characters of the specified length.
+
+Character Set:
+The UID is composed of characters from the following set:
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+
+Notes:
+- Requires the pgcrypto extension.
+- Uses gen_random_bytes() for secure random number generation.
+- Ensures uniform distribution across the character set.
+- Raises an exception if the length parameter is NULL or non-positive.
+
+Usage Examples:
+1. Generate a 10-character UID:
+   SELECT _uid(10);
+
+2. Use as a default value for a column:
+   CREATE TABLE users (
+       id SERIAL PRIMARY KEY,
+       uid TEXT UNIQUE NOT NULL DEFAULT _uid(10)
+   );
+
+3. Generate UID in an INSERT statement:
+   INSERT INTO users (uid, username) VALUES (_uid(15), 'john_doe');
+
+Performance:
+This function performs multiple database operations and should be used judiciously
+in high-volume insert scenarios. Consider generating UIDs in batches for better performance
+in such cases.
+*/
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE OR REPLACE FUNCTION _uid(len INTEGER)
 RETURNS TEXT AS $$
