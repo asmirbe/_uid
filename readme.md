@@ -51,7 +51,7 @@ The risk of UID collision is extremely low when using appropriate lengths:
 
 For detailed calculations and more length options, see [collision_analysis.md](collision_analysis.md).
 
-**Comparison with UUID:** A 22-character _uid provides similar collision resistance to UUID v4 (128 bits) but is **39% shorter** than UUID without hyphens (32 chars).
+**Comparison with UUID:** A 22-character `_uid` provides similar collision resistance to UUID v4 (128 bits) but is **39% shorter** than UUID without hyphens (32 chars).
 
 ## Performance
 

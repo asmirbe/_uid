@@ -263,7 +263,7 @@ BEGIN
         END IF;
     END LOOP;
 
-    -- Handle edge case: if buffer was insufficient (very rare: ~0.00001% chance)
+    -- Handle edge case: if buffer was insufficient (very rare: ~0.08% chance for len=11)
     IF length(result) < len THEN
         result := result || _uid_hybrid(len - length(result));
     END IF;
@@ -283,7 +283,7 @@ PROS:
 ✓ Fast byte-level operations
 
 CONS:
-✗ Slight recursion risk (negligible: 0.00001%)
+✗ Slight recursion risk (negligible: ~0.08% for len=11)
 ✗ ~10% memory overhead
 
 VERDICT: **RECOMMENDED OPTIMIZATION**
