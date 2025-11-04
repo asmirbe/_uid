@@ -166,4 +166,4 @@ n ≈ 4.29 × sqrt(62^len)
 ---
 
 *Generated: 2025-11-04*
-*Author: Claude Code Analysis*
+*Analysis by: Asmir Belkic*

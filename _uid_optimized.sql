@@ -71,8 +71,8 @@ BEGIN
         END IF;
     END LOOP;
 
-    -- Handle edge case: if buffer was insufficient (extremely rare: ~0.08%)
-    -- This happens when we get unlucky with rejections (> 10%)
+    -- Handle edge case: if buffer was insufficient (occurs in ~0.08% of calls for len=11)
+    -- This happens when we get unlucky with rejections (> 10% rejected bytes)
     IF length(result) < len THEN
         result := result || _uid_fast(len - length(result));
     END IF;
