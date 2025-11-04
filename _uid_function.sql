@@ -61,8 +61,9 @@ BEGIN
     -- Convert random bytes to characters
     FOR i IN 1..len LOOP
         rand_int := get_byte(rand_bytes, i - 1);
-        -- Ensure rand_int is within the valid range (0-61)
-        WHILE rand_int > 248 LOOP
+        -- Ensure rand_int is within the valid range (0-247) to avoid modulo bias
+        -- 248 = 62 * 4, which ensures uniform distribution across 62 characters
+        WHILE rand_int >= 248 LOOP
             rand_int := get_byte(gen_random_bytes(1), 0);
         END LOOP;
         result := result || substr(uid_chars, (rand_int % 62) + 1, 1);
